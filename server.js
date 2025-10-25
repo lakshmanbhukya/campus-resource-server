@@ -24,9 +24,7 @@ app.use(express.json({ limit: '10mb' }));
 
 // CORS configuration for development and production
 app.use(cors({
-  origin: process.env.NODE_ENV === 'production'
-    ? '*'
-    : allowedOrigins
+  origin: '*'
 }));
 
 app.use(express.static('public'));
