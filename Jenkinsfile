@@ -12,32 +12,32 @@ pipeline {
             }
         }
 
-
         stage('Install Dependencies') {
             steps {
                 echo '📦 Installing dependencies...'
-                sh 'npm install'
+                bat 'npm install'
             }
         }
 
         stage('Lint') {
             steps {
                 echo '🧹 Running lint checks...'
-                sh 'npm run lint || echo "No lint script found"'
+                bat 'npm run lint || echo No lint script found'
             }
         }
 
         stage('Run Tests') {
             steps {
                 echo '🧪 Running tests...'
-                sh 'npm test || echo "No tests defined"'
+                bat 'npm test || echo No tests defined'
             }
         }
 
         stage('Start Server') {
             steps {
                 echo '🚀 Starting the server...'
-                sh 'nohup npm start &'
+                // Start in background without blocking Jenkins
+                bat 'start /B npm start'
             }
         }
     }
