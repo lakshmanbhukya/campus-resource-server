@@ -6,12 +6,12 @@ pipeline {
     }
 
     stages {
-        stage('Checkout') {
+        sstage('Checkout') {
             steps {
-                echo '📦 Cloning the repository...'
-                git 'https://github.com/lakshmanbhukya/campus-resource-server.git'
+                git branch: 'main', url: 'https://github.com/lakshmanbhukya/campus-resource-server.git'
             }
         }
+
 
         stage('Install Dependencies') {
             steps {
