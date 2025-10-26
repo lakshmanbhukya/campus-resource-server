@@ -6,7 +6,7 @@ pipeline {
     }
 
     stages {
-        sstage('Checkout') {
+        stage('Checkout') {
             steps {
                 git branch: 'main', url: 'https://github.com/lakshmanbhukya/campus-resource-server.git'
             }
