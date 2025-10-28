@@ -49,3 +49,22 @@ jobs:
           context: .
           push: true
           tags: ${{ secrets.DOCKER_USERNAME }}/campus-resource-server:latest
+
+  notify:
+    runs-on: ubuntu-latest
+    needs: [test, docker]
+    if: always()  # ensures notification runs even on failure
+    
+    steps:
+      - name: Send Discord Notification
+        if: failure()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d "{\"content\": \"❌ Build failed for $GITHUB_REPOSITORY at commit $GITHUB_SHA\"}" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
+      - name: Send Success Notification
+        if: success()
+        run: |
+          curl -H "Content-Type: application/json" \
+          -d "{\"content\": \"✅ Build succeeded for $GITHUB_REPOSITORY\"}" \
+          ${{ secrets.DISCORD_WEBHOOK_URL }}
