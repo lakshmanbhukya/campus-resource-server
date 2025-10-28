@@ -28,16 +28,43 @@ pipeline {
 
         stage('Run Tests') {
             steps {
-                echo '🧪 Running tests...'
+                echo '🧪 Running tests with coverage...'
                 bat 'npm test || echo No tests defined'
+            }
+            post {
+                always {
+                    script {
+                        if (fileExists('coverage/lcov-report/index.html')) {
+                            publishHTML([
+                                allowMissing: false,
+                                alwaysLinkToLastBuild: true,
+                                keepAll: true,
+                                reportDir: 'coverage/lcov-report',
+                                reportFiles: 'index.html',
+                                reportName: 'Coverage Report'
+                            ])
+                        }
+                    }
+                }
             }
         }
 
-        stage('Start Server') {
+        stage('Build & Archive') {
+            steps {
+                echo '📦 Archiving artifacts...'
+                script {
+                    if (fileExists('coverage')) {
+                        archiveArtifacts artifacts: 'coverage/**/*', allowEmptyArchive: true
+                    }
+                }
+            }
+        }
+
+        stage('Deploy') {
             steps {
                 echo '🚀 Starting the server...'
-                // Start in background without blocking Jenkins
                 bat 'start /B npm start'
+                echo 'Server deployment initiated'
             }
         }
     }
