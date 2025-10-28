@@ -54,7 +54,7 @@ async function debugServer() {
     const resourceCount = await Resource.countDocuments();
     const borrowCount = await Borrow.countDocuments();
     
-    console.log(`📊 Database Statistics:`);
+    console.log('📊 Database Statistics:');
     console.log(`   Users: ${userCount}`);
     console.log(`   Resources: ${resourceCount}`);
     console.log(`   Borrow Requests: ${borrowCount}`);

@@ -105,7 +105,7 @@ testFiles.forEach(file => {
   }
 });
 
-console.log(`\n📊 Summary:`);
+console.log('\n📊 Summary:');
 console.log(`Basic Setup: ${passedChecks}/${totalChecks} checks passed`);
 console.log(`Test Files: ${existingTestFiles}/${testFiles.length} files found`);
 

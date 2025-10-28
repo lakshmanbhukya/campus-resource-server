@@ -1,8 +1,8 @@
 require('dotenv').config();
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 
 // MongoDB connection string with database name
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb+srv://lakshmanbhukya:lakshmanbhukya@24505a0502.pdqtqlz.mongodb.net/campus-resource?retryWrites=true&w=majority&appName=24505a0502";
+const MONGODB_URI = process.env.MONGODB_URI || 'mongodb+srv://lakshmanbhukya:lakshmanbhukya@24505a0502.pdqtqlz.mongodb.net/campus-resource?retryWrites=true&w=majority&appName=24505a0502';
 
 // Connection options
 const options = {
@@ -14,12 +14,12 @@ const options = {
 mongoose
   .connect(MONGODB_URI, options)
   .then(() => {
-    console.log("✅ MongoDB connected successfully");
-    console.log(`📊 Database: campus-resource`);
+    console.log('✅ MongoDB connected successfully');
+    console.log('📊 Database: campus-resource');
     console.log(`🔗 Connection state: ${mongoose.connection.readyState}`);
   })
   .catch((err) => {
-    console.error("❌ MongoDB connection error:", err.message);
+    console.error('❌ MongoDB connection error:', err.message);
     process.exit(1);
   });
 
